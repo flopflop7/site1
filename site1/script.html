@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisa Online</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #9B4DFF; /* Cor roxa */
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .header {
+            margin-top: 20px;
+        }
+        .logo {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+        .content {
+            background: rgba(0, 0, 0, 0.3); /* Fundo abstrato */
+            padding: 30px;
+            border-radius: 8px;
+        }
+        .question-container {
+            margin-top: 20px;
+        }
+        .question {
+            font-size: 20px;
+        }
+        .buttons {
+            margin-top: 15px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            border: none;
+            background-color: #6a1b9a;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #ab47bc;
+        }
+        #value {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        #limit-msg {
+            display: none;
+            margin-top: 20px;
+            color: yellow;
+        }
+        .thank-you {
+            display: none;
+            margin-top: 20px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/Nubank_Logo.png" class="logo" alt="Logo Nubank">
+        <h1>Pesquisa Online</h1>
+    </div>
+    <div class="content">
+        <div id="questions">
+            <div class="question-container" id="question-container">
+                <div class="question" id="question-text">Você já usou produtos da Samsung?</div>
+                <div class="buttons">
+                    <button onclick="answer('yes')">Sim</button>
+                    <button onclick="answer('no')">Não</button>
+                </div>
+            </div>
+            <div id="value">Valor acumulado: R$33,00</div>
+        </div>
+        <div id="limit-msg">Você atingiu o limite diário de perguntas! Volte em 24 horas.</div>
+        <div class="thank-you">Obrigado por participar! Seu saldo está pronto para saque.</div>
+    </div>
+
+    <script>
+        let totalValue = 33.00; // Valor inicial
+        let questionCount = 0; // Contador de perguntas respondidas
+
+        // Lista de marcas para as perguntas
+        const brands = [
+            "Samsung", "Apple", "Sony", "Pantene", "Seda", 
+            "Nívea", "Rexona", "Pandora", "Vivara"
+        ];
+
+        let currentBrand = 0;
+
+        function answer(response) {
+            if (questionCount >= 10) {
+                document.getElementById('limit-msg').style.display = 'block';
+                document.getElementById('question-container').style.display = 'none';
+                return;
+            }
+
+            // Atualiza o valor
+            totalValue += 13.50;
+            document.getElementById('value').textContent = Valor acumulado: R$${totalValue.toFixed(2)};
+
+            questionCount++;
+            currentBrand++;
+
+            // Verifica se ainda há perguntas
+            if (currentBrand < brands.length) {
+                document.getElementById('question-text').textContent = Você já usou produtos da ${brands[currentBrand]}?;
+            } else {
+                document.getElementById('question-text').textContent = "Você completou as perguntas!";
+                document.getElementById('thank-you').style.display = 'block';
+                document.getElementById('question-container').style.display = 'none';
+            }
+
+            // Quando 10 perguntas forem respondidas, exibe a mensagem de limite
+            if (questionCount >= 10) {
+                document.getElementById('limit-msg').style.display = 'block';
+                document.getElementById('question-container').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
